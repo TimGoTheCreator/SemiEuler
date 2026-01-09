@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 project(SemiEuler VERSION 0.9.0 LANGUAGES CXX)
 
 # Require modern C++
-set(CMAKE_CXX_STANDARD 11)   # match your g++ -std=c++11
+set(CMAKE_CXX_STANDARD 11)   
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
