@@ -1,30 +1,31 @@
 #include"conf.h"
-#include<fstream>
+#include"raylib.h"
 
 int main() {
+    InitWindow(800, 600, "SemiEuler");
     Particle earth(0, 0, 0, 0, 5.97e24);
     Particle moon(384400000, 0, 0, 1022, 7.35e22);
+    SetTargetFPS(0); // run as fast as the cpu can :)
 
-    std::ofstream out("positions.csv");
-    out << "time,earth_x,earth_y,moon_x,moon_y\n";
+    double dt = 0.4;
+    double simTime = 0.0;
 
-    double dt = 50.0; // time step in seconds
-    double time = 0.0;
+    while (!WindowShouldClose()) {
+        for(int i = 0; i < 10000; i++) {
+            Gravity(earth, moon, dt);
+            earth.x += earth.vx * dt;
+            earth.y += earth.vy * dt;
+            moon.x += moon.vx * dt;
+            moon.y += moon.vy * dt;
+            simTime += dt;
+            }
+        
 
-    // write initial positions
-    out << time << ',' << earth.x << ',' << earth.y << ',' << moon.x << ',' << moon.y << '\n';
-
-    for(int step = 0; step < 40000; ++step)
-    {
-        Gravity(earth, moon, dt);
-        earth.x += earth.vx * dt;
-        earth.y += earth.vy * dt;
-        moon.x += moon.vx * dt;
-        moon.y += moon.vy * dt;
-
-        time += dt;
-        out << time << ',' << earth.x << ',' << earth.y << ',' << moon.x << ',' << moon.y << '\n';
+        double scale = 1.5e6;
+        BeginDrawing();
+        ClearBackground(BLACK);
+        DrawCircle((int)(earth.x / scale) + 400, (int)(earth.y / scale) + 300, 10, BLUE);
+        DrawCircle((int)(moon.x / scale) + 400, (int)(moon.y / scale) + 300, 5, GRAY);
+        EndDrawing();
     }
-
-    out.close();
 }
