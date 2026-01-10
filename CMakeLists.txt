@@ -44,7 +44,6 @@ list(LENGTH RAYLIB_SUBDIRS _raylib_count)
 if (_raylib_count EQUAL 0)
     message(FATAL_ERROR "Raylib extraction failed—no raylib-* directory found in ${RAYLIB_ROOT}")
 elseif(_raylib_count GREATER 1)
-    # Pick the first match deterministically
     list(SORT RAYLIB_SUBDIRS)
     list(GET RAYLIB_SUBDIRS 0 RAYLIB_DIR)
 else()
@@ -60,11 +59,26 @@ if (WIN32)
     target_link_directories(SemiEuler PRIVATE ${RAYLIB_LIB_DIR})
     target_link_libraries(SemiEuler PRIVATE raylib opengl32 gdi32 winmm ws2_32)
     target_link_options(SemiEuler PRIVATE -s)
+
 elseif(UNIX)
+    # Check for system dependencies
+    find_package(OpenGL)
+    find_package(X11)
+
+    if (NOT OpenGL_FOUND OR NOT X11_FOUND)
+        message(WARNING "Missing system libraries. Running setup.sh to install dependencies...")
+        execute_process(
+            COMMAND bash ${CMAKE_SOURCE_DIR}/setup.sh
+            RESULT_VARIABLE setup_result
+        )
+        if (NOT setup_result EQUAL 0)
+            message(FATAL_ERROR "setup.sh failed. Please run it manually with sudo.")
+        endif()
+    endif()
+
     target_include_directories(SemiEuler PRIVATE ${RAYLIB_INCLUDE_DIR})
     target_link_directories(SemiEuler PRIVATE ${RAYLIB_LIB_DIR})
     target_link_libraries(SemiEuler PRIVATE raylib m dl pthread X11 GL GLU)
     target_compile_options(SemiEuler PRIVATE -Wall -Wextra -Wpedantic)
 endif()
-
 install(TARGETS SemiEuler DESTINATION bin)
