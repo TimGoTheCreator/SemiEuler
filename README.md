@@ -1,9 +1,11 @@
 # SemiEuler
-Semi implicit Euler implementation in C++ to simulate interaction of N-Body objects
+### A Graphical Semi implicit Euler implementation in C++ to simulate interaction of N-Body objects
 
 ![CI](https://github.com/TimGoTheCreator/SemiEuler/actions/workflows/cmake-multi-platform.yml/badge.svg)
 ![Language](https://img.shields.io/badge/language-C++-blue.svg)
 ![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)
+
+### Semi Euler is built on top of the "RayLib" Library
 
 # How to install Dependencies (Windows)
 Install MSYS2 From [msys2.org](https://msys2.org)
@@ -12,8 +14,9 @@ then open the MinGW64 shell and type
 pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake mingw-w64-x86_64-make
 ```
 
+# MSVC Dependencies
 For MSVC builds, Visual Studio 2022 with C++ Desktop Development workload is required.
-Raylib is auto-downloaded by CMake.
+Raylib and other system dependencies are auto-downloaded by CMake.
 
 # How to compile SemiEuler (CMake MSVC/MinGW64 Windows)
 
