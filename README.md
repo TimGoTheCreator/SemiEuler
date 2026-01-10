@@ -5,7 +5,7 @@
 ![Language](https://img.shields.io/badge/language-C++-blue.svg)
 ![License](https://img.shields.io/badge/license-Apache%202.0-green.svg)
 
-### Semi Euler is built on top of the "RayLib" Library
+### Semi Euler is built on top of the [RayLib](https://github.com/raysan5/raylib) Library
 
 # How to install Dependencies (Windows)
 Install MSYS2 From [msys2.org](https://msys2.org)
