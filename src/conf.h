@@ -1,3 +1,5 @@
+// Copyright 2026 Timofey Zakharchuk (GitHub: TimGoTheCreator)
+// Licensed under the Apache License, Version 2.0
 #pragma once
 #include <cmath>
 #include <string>
