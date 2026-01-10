@@ -8,7 +8,7 @@ then open the MinGW64 shell and type
 pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake mingw-w64-x86_64-make
 ```
 
-How to compile SemiEuler (CMake Windows)
+How to compile SemiEuler (CMake MSVC/MinGW64 Windows)
 
 ```bash
 mkdir build
